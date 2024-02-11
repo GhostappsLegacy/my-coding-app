@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project View</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    background-color: black; /* Static styling */
+    color: white; /* Static styling */
+    font-family: sans-serif; /* Static styling */
+  }
+  #project-title {
+    /* Dynamic styling can be applied via JS */
+  }
+</style>
+</head>
+<body>
+<div id="project-details">
+  <h1 id="project-title">Default Project Name</h1>
+  <!-- Additional content here -->
+</div>
+<script>
+  // Script to dynamically set the project title based on the URL parameter
+  window.onload = function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var projectName = urlParams.get('name');
+    if (projectName) {
+      document.getElementById('project-title').textContent = projectName;
+      // Apply dynamic styling if needed
+      document.getElementById('project-title').style.fontSize = '2em'; // Example of dynamic styling
+    }
+  };
+</script>
+</body>
+</html>
