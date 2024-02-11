@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reminder App</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!—(🅒🅢🅢-🅢🅣🅨🅛🅔-🅢🅣🅐🅡🅣)—>
+<style>
+  /* Additional styles if needed */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000000;
+ }
+
+.project-item-btn {
+  /* ... other styles ... */
+  position: relative; /* Needed for absolute positioning of the pseudo-element */
+  border-bottom: none; /* Remove the border from the button itself */
+}
+
+.project-item-btn::after {
+  content: '';
+  display: block;
+  height: 0.5px;
+  background-color: #323135;
+  position: absolute;
+  bottom: 0;
+  left: 40px;
+  right: 0; 
+}
+
+.project-item-btn:last-child::after {
+  display: none; /* Hide the line for the last button */
+}
+
+/* Project Column */
+#project-column {
+  background-color: #1a1a1a;
+  padding: 0rem;
+  margin: 2rem auto; /* Margin for top and bottom, auto centers the column horizontally */
+  width: 90%; /* Width of the column */
+  border-radius: 12px; /* Rounded corners for the column */
+  display: flex; /* Use flex layout to organize children */
+  flex-direction: column; /* Stack children vertically */
+  gap: 0.5rem; /* Space between the project buttons */
+}
+
+  .modal-content {
+    background-color: #000000;
+    margin: 15% auto;
+    padding: 20px;
+    border: none;
+    width: 100%;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
+  .modal-input {
+    background-color: #47474b;
+    color: white;
+    height: 50px;
+    width: 100%;
+    margin-bottom: 1rem;
+    border: none;
+    box-sizing: border-box;
+  }
+
+  .modal-button {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: none;
+    font-size: 1rem;
+  }
+
+  /* Fixed Bottom Navigation Bar */
+  .fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 4;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+.svg-icon {
+  width: 24px; /* Adjust the size as needed */
+  height: auto;
+}
+
+.icon-span {
+  display: flex;
+  align-items: center;
+}
+
+</style>
+<!—(🅒🅢🅢-🅢🅣🅨🅛🅔-🅔🅝🅓)—>
+
+<!—(ⒿⓐⓥⓐⓈⓒⓡⓘⓟⓣ-ⓈⓉⒶⓇⓉ)—>
+<script>
+  function toggleModal() {
+    var modal = document.getElementById("myModal");
+    var projectColumn = document.getElementById("project-column");
+    var projectTitle = document.getElementById("project-title");
+    if (modal.style.display === "block") {
+      modal.style.display = "none";
+      projectTitle.style.display = "block";
+      if (projectColumn.hasChildNodes()) {
+        projectColumn.style.display = "block";
+      }
+    } else {
+      modal.style.display = "block";
+      projectTitle.style.display = "none";
+      projectColumn.style.display = "none";
+    }
+  }
+
+function addProject() {
+  var nameInput = document.getElementById("projectNameInput");
+  var projectName = nameInput.value.trim();
+  if (projectName) {
+    var projectColumn = document.getElementById("project-column");
+    var newButton = document.createElement("button");
+    newButton.className = "project-item-btn text-white p-4 flex justify-between items-center w-full";
+
+    // Span for project name
+    var textSpan = document.createElement("span");
+    textSpan.textContent = projectName;
+
+    // Span for the count (0) and the icon
+    var countAndIconSpan = document.createElement("span");
+    countAndIconSpan.className = "flex items-center";
+
+    // Span for the count (0)
+    var countSpan = document.createElement("span");
+    countSpan.textContent = "0";
+    countSpan.className = "text-gray-400"; // Style as needed
+
+    // Create the image element for the SVG icon
+    var img = document.createElement("img");
+    img.src = 'https://raw.githubusercontent.com/GhostappsLegacy/Icons-images/main/arrow-ios-forward-svgrepo-com.svg';
+    img.alt = 'Forward';
+    img.className = 'svg-icon'; // Class to style the icon if needed
+
+    // Append the count and the icon to the container span
+    countAndIconSpan.appendChild(countSpan);
+    countAndIconSpan.appendChild(img);
+
+    // Append the project name span and the count/icon span to the button
+    newButton.appendChild(textSpan);
+    newButton.appendChild(countAndIconSpan);
+
+    // Add event listener for the button
+    newButton.addEventListener('click', function() {
+      alert('Button clicked: ' + projectName);
+    });
+
+    // Append the button to the project column and display the column
+    projectColumn.appendChild(newButton);
+    nameInput.value = '';
+    projectColumn.style.display = "flex";
+    toggleModal();
+  }
+}
+
+</script>
+
+<!—(ⒿⓐⓥⓐⓈⓒⓡⓘⓟⓣ-ⒺⓃⒹ)—>
+
+</head>
+<body class="bg-black text-white font-sans">
+
+<!-- Project Title -->
+<h1 id="project-title" class="text-4xl font-bold mt-6 px-4">My Projects</h1>
+
+<!-- Project Column -->
+<div id="project-column" class="px-4"></div>
+
+<!-- Fixed Bottom Navigation Bar -->
+<div class="fixed-bottom">
+  <button onclick="toggleModal()" class="modal-button">
+    <i class="fas fa-plus"></i> Create Project
+  </button>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <input type="text" id="projectNameInput" class="modal-input w-full p-2 outline-none" placeholder="Project Name">
+    <button onclick="addProject()" class="modal-button">Done</button>
+  </div>
+</div>
+
+</body>
+</html>
