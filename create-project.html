@@ -1,0 +1,57 @@
+<!-- Start of Create Project Component -->
+<div id="create-project-drawer" class="fixed inset-x-0 bottom-0 p-4 bg-gray-900 text-white" style="display: none;">
+  <div class="top-bar flex justify-between items-center p-4">
+    <button id="cancel-create-project" class="text-red-500">Cancel</button>
+    <h2 class="text-center flex-1">New Project</h2>
+    <button id="done-create-project" class="text-blue-500">Done</button>
+  </div>
+  
+  <div class="icon-name-input my-4 text-center">
+    <div class="icon-placeholder mx-auto mb-4">
+      <!-- Icon SVG goes here -->
+      <i class="fas fa-folder-open fa-3x"></i> <!-- Placeholder icon -->
+    </div>
+    <input type="text" id="project-name" class="modal-input" placeholder="List Name">
+  </div>
+  
+  <div class="color-selection flex justify-center gap-2 my-4">
+    <!-- Color circles placeholders -->
+    <!-- Replace these placeholders with actual color options -->
+    <div class="w-6 h-6 rounded-full bg-red-500"></div>
+    <div class="w-6 h-6 rounded-full bg-yellow-500"></div>
+    <div class="w-6 h-6 rounded-full bg-green-500"></div>
+    <!-- ... more colors ... -->
+  </div>
+  
+  <div class="icon-selection grid grid-cols-6 gap-2 my-4 overflow-auto">
+    <!-- Icon placeholders -->
+    <!-- Replace these placeholders with actual icons -->
+    <i class="fas fa-briefcase fa-lg"></i>
+    <i class="fas fa-coffee fa-lg"></i>
+    <i class="fas fa-utensils fa-lg"></i>
+    <!-- ... more icons ... -->
+  </div>
+</div>
+
+<style>
+  /* Styles specific to the Create Project Drawer */
+  /* Add here the styles that you want to apply only to the bottom drawer and not globally */
+</style>
+
+<script>
+  // Script to handle the opening and closing of the create project drawer
+  document.getElementById('cancel-create-project').addEventListener('click', function() {
+    document.getElementById('create-project-drawer').style.display = 'none';
+  });
+
+  document.getElementById('done-create-project').addEventListener('click', function() {
+    // Implement the logic to create a new project and add it to the list
+    const projectName = document.getElementById('project-name').value;
+    // ... logic to add the project ...
+    document.getElementById('create-project-drawer').style.display = 'none';
+  });
+  
+  // Logic to handle the selection of colors and icons
+  // ...
+</script>
+<!-- End of Create Project Component -->
